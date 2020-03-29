@@ -1,0 +1,37 @@
+version: '3.7'
+
+services:
+  web:
+    build: 
+      context: ./app
+      dockerfile: Dockerfile.prd
+    command: gunicorn yaem.wsgi:application --bind 0.0.0.0:8000
+    volumes:
+      - static_volume:/home/app/web/staticfiles
+    expose:
+      - 8000
+    env_file:
+      - ./.env.prd
+    depends_on:
+      - db
+  db:
+    image: postgres:12.0-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    ports:
+      - 12100:5432
+    env_file:
+      - ./.env.prd.db
+
+  nginx:
+    build: ./nginx
+    volumes:
+      - static_volume:/home/app/web/staticfiles
+    ports:
+      - 1337:80
+    depends_on:
+      - web
+
+volumes:
+  postgres_data:
+  static_volume:
