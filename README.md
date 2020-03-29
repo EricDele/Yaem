@@ -6,21 +6,7 @@ Yet Another Env Manager
   - [Requirements](#requirements)
   - [Architecture](#architecture)
   - [How to install](#how-to-install)
-    - [Installing docker](#installing-docker)
-    - [Installing Yaem](#installing-yaem)
-  - [Dev environment](#dev-environment)
-    - [Dev: Build](#dev-build)
-    - [Dev: See the logs](#dev-see-the-logs)
-    - [Dev: Migrate](#dev-migrate)
-    - [Dev: Connexion to the database](#dev-connexion-to-the-database)
-    - [Dev: Stop](#dev-stop)
-  - [Production environment](#production-environment)
-    - [Prod: Build](#prod-build)
-    - [Prod: See the logs](#prod-see-the-logs)
-    - [Prod: Migrate](#prod-migrate)
-    - [Prod: Connexion to the database](#prod-connexion-to-the-database)
-    - [Prod: Colect staticfiles](#prod-colect-staticfiles)
-    - [Prod: Stop](#prod-stop)
+  - [Manage your containers](#manage-your-containers)
 
 
 ## Goal of this project
@@ -44,86 +30,9 @@ A beautifull schema will come sooner
 
 ## How to install
 
-We use docker to provide the Development and Production environments.
+Follow the [Installation documentation](doc/install.md)
 
-### Installing docker
+## Manage your containers
 
-We use this [documentation](https://docs.docker.com/install/linux/docker-ce/ubuntu/) to install docker on an Ubuntu.
+Follow the [Docker management](doc/docker.md)
 
-We use this [documentation](https://docs.docker.com/compose/install/#install-compose-on-linux-systems) to install docker-compose on an Ubuntu.
-
-You just have to follow the explanation before trying this project.
-
-### Installing Yaem
-
-You just have to clone this repository in your favorite project folder on your computer.
-
-## Dev environment
-
-### Dev: Build
-
-```Shell
-[Yaem]>docker-compose up -d --build
-```
-
-### Dev: See the logs
-
-```Shell
-[Yaem]>docker-compose logs -f
-```
-
-### Dev: Migrate
-
-```Shell
-[Yaem]>docker-compose exec web python manage.py migrate --noinput
-```
-
-### Dev: Connexion to the database
-
-```Shell
-[Yaem]>docker-compose exec db psql --username=yaem --dbname=yaem
-```
-
-### Dev: Stop
-
-```Shell
-[Yaem]>docker-compose down -v
-```
-
-## Production environment
-
-### Prod: Build
-
-```Shell
-[Yaem]>docker-compose -f docker-compose.prd.yml up -d --build
-```
-
-### Prod: See the logs
-
-```Shell
-[Yaem]>docker-compose -f docker-compose.prd.yml logs -f
-```
-
-### Prod: Migrate
-
-```Shell
-[Yaem]>docker-compose -f docker-compose.prd.yml exec web python manage.py migrate --noinput
-```
-
-### Prod: Connexion to the database
-
-```Shell
-[Yaem]>docker-compose -f docker-compose.prd.yml exec db psql --username=yaem --dbname=yaem
-```
-
-### Prod: Colect staticfiles
-
-```Shell
-[Yaem]>docker-compose -f docker-compose.prd.yml exec web python manage.py collectstatic --no-input --clear
-```
-
-### Prod: Stop
-
-```Shell
-[Yaem]>docker-compose -f docker-compose.prd.yml down -v
-```
