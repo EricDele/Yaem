@@ -2,20 +2,28 @@
 
 - [Docker](#docker)
   - [Dev environment](#dev-environment)
+    - [Dev : Url](#dev--url)
     - [Dev: Build](#dev-build)
     - [Dev: See the logs](#dev-see-the-logs)
+    - [Dev: MakeMigration](#dev-makemigration)
     - [Dev: Migrate](#dev-migrate)
     - [Dev: Connexion to the database](#dev-connexion-to-the-database)
     - [Dev: Stop](#dev-stop)
   - [Production environment](#production-environment)
+    - [Prod : Url](#prod--url)
     - [Prod: Build](#prod-build)
     - [Prod: See the logs](#prod-see-the-logs)
+    - [Prod: MakeMigration](#prod-makemigration)
     - [Prod: Migrate](#prod-migrate)
     - [Prod: Connexion to the database](#prod-connexion-to-the-database)
     - [Prod: Colect staticfiles](#prod-colect-staticfiles)
     - [Prod: Stop](#prod-stop)
 
 ## Dev environment
+
+### Dev : Url
+
+You can access the application once it have started at this url : http://localhost:8000
 
 ### Dev: Build
 
@@ -27,6 +35,12 @@
 
 ```Shell
 [Yaem]>docker-compose logs -f
+```
+
+### Dev: MakeMigration
+
+```Shell
+[Yaem]>docker-compose exec web python manage.py makemigrations --noinput
 ```
 
 ### Dev: Migrate
@@ -49,6 +63,10 @@
 
 ## Production environment
 
+### Prod : Url
+
+You can access the application once it have started at this url : http://localhost:1337
+
 ### Prod: Build
 
 ```Shell
@@ -59,6 +77,12 @@
 
 ```Shell
 [Yaem]>docker-compose -f docker-compose.prd.yml logs -f
+```
+
+### Prod: MakeMigration
+
+```Shell
+[Yaem]>docker-compose -f docker-compose.prd.yml exec web python manage.py makemigrations --noinput
 ```
 
 ### Prod: Migrate
