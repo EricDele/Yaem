@@ -19,10 +19,16 @@ Here is the list of the needed technologies for this application that you can re
 - Docker 19.03.8
 - docker-compose 1.25.4
 - python 3.7.5
-- django 3.0.4
 - postgresql 12
 - gunicorn 20.0.4
 - nginx 1.17.4
+
+For the django part 
+- django 3.0.4
+- djangorestframework 3.11.0
+- markdown 3.2.1
+- django-filter 2.2.0
+- PyYAML 5.1.2
 
 ## Architecture
 
