@@ -1,0 +1,127 @@
+# Environment
+- model: manager.Env_type
+  pk: 1
+  fields:
+    name: Development
+- model: manager.Env_type
+  pk: 2
+  fields:
+    name: Integration Fonctionnelle
+- model: manager.Env_type
+  pk: 3
+  fields:
+    name: Homologation
+- model: manager.Env_type
+  pk: 4
+  fields:
+    name: Production
+- model: manager.Env_type
+  pk: 5
+  fields:
+    name: Secours
+
+# Host status
+- model: manager.Host_status
+  pk: 1
+  fields:
+    name: Provisionning
+- model: manager.Host_status
+  pk: 2
+  fields:
+    name: Spare
+- model: manager.Host_status
+  pk: 3
+  fields:
+    name: Error
+- model: manager.Host_status
+  pk: 4
+  fields:
+    name: Used
+
+# Host type
+- model: manager.Host_type
+  pk: 1
+  fields:
+    name: admin
+- model: manager.Host_type
+  pk: 2
+  fields:
+    name: master
+- model: manager.Host_type
+  pk: 3
+  fields:
+    name: infrastructure
+- model: manager.Host_type
+  pk: 4
+  fields:
+    name: datanode
+- model: manager.Host_type
+  pk: 5
+  fields:
+    name: workernode
+- model: manager.Host_type
+  pk: 6
+  fields:
+    name: edgenode
+- model: manager.Host_type
+  pk: 7
+  fields:
+    name: edgedatalab
+- model: manager.Host_type
+  pk: 8
+  fields:
+    name: nifinode
+- model: manager.Host_type
+  pk: 9
+  fields:
+    name: talendnode
+- model: manager.Host_type
+  pk: 10
+  fields:
+    name: elasticsearchnode
+- model: manager.Host_type
+  pk: 11
+  fields:
+    name: datanodearchive
+
+# Service
+- model: manager.Service
+  pk: 1
+  fields:
+    name: namenode
+- model: manager.Service
+  pk: 2
+  fields:
+    name: journalnode
+- model: manager.Service
+  pk: 3
+  fields:
+    name: zookeeper
+- model: manager.Service
+  pk: 4
+  fields:
+    name: ssh
+- model: manager.Service
+  pk: 5
+  fields:
+    name: ambari-agent
+- model: manager.Service
+  pk: 6
+  fields:
+    name: java
+- model: manager.Service
+  pk: 7
+  fields:
+    name: postgresql
+- model: manager.Service
+  pk: 8
+  fields:
+    name: krb5kdc
+- model: manager.Service
+  pk: 9
+  fields:
+    name: slapd
+- model: manager.Service
+  pk: 10
+  fields:
+    name: hbase

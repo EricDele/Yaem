@@ -8,6 +8,7 @@
     - [Dev: MakeMigration](#dev-makemigration)
     - [Dev: Migrate](#dev-migrate)
     - [Dev: Connexion to the database](#dev-connexion-to-the-database)
+    - [Dev : Loading fixtures to database](#dev--loading-fixtures-to-database)
     - [Dev: Stop](#dev-stop)
   - [Production environment](#production-environment)
     - [Prod : Url](#prod--url)
@@ -17,6 +18,7 @@
     - [Prod: Migrate](#prod-migrate)
     - [Prod: Connexion to the database](#prod-connexion-to-the-database)
     - [Prod: Colect staticfiles](#prod-colect-staticfiles)
+    - [Prod : Loading fixtures to database](#prod--loading-fixtures-to-database)
     - [Prod: Stop](#prod-stop)
 
 ## Dev environment
@@ -53,6 +55,12 @@ You can access the application once it have started at this url : http://localho
 
 ```Shell
 [Yaem]>docker-compose exec db psql --username=yaem --dbname=yaem
+```
+
+### Dev : Loading fixtures to database
+
+```Shell
+[Yaem]> docker-compose exec web python manage.py loaddata manager/fixtures.yaml
 ```
 
 ### Dev: Stop
@@ -101,6 +109,11 @@ You can access the application once it have started at this url : http://localho
 
 ```Shell
 [Yaem]>docker-compose -f docker-compose.prd.yml exec web python manage.py collectstatic --no-input --clear
+```
+### Prod : Loading fixtures to database
+
+```Shell
+[Yaem]> docker-compose -f docker-compose.prd.yml exec web python manage.py loaddata manager/fixtures.yaml
 ```
 
 ### Prod: Stop
