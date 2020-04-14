@@ -14,7 +14,7 @@ class Manager(models.Model):
         # Default ordering
         ordering = ['key']
 
-    def _str__(self):
+    def __str__(self):
         """String for representing"""
         return self.key + " = " + self.value
 
@@ -29,7 +29,7 @@ class Env_type(models.Model):
         # Default ordering
         ordering = ['name']
 
-    def _str__(self):
+    def __str__(self):
         """String for representing"""
         return self.name
 
@@ -44,7 +44,7 @@ class Host_type(models.Model):
         # Default ordering
         ordering = ['name']
 
-    def _str__(self):
+    def __str__(self):
         """String for representing"""
         return self.name
 
@@ -59,7 +59,7 @@ class Host_status(models.Model):
         # Default ordering
         ordering = ['name']
 
-    def _str__(self):
+    def __str__(self):
         """String for representing"""
         return self.name
 
@@ -74,7 +74,7 @@ class Service(models.Model):
         # Default ordering
         ordering = ['name']
 
-    def _str__(self):
+    def __str__(self):
         """String for representing"""
         return self.name
 
@@ -93,7 +93,7 @@ class Server(models.Model):
         # Default ordering
         ordering = ['name']
 
-    def _str__(self):
+    def __str__(self):
         """String for representing"""
         return self.name
 
@@ -109,7 +109,7 @@ class Cluster(models.Model):
         # Default ordering
         ordering = ['name']
 
-    def _str__(self):
+    def __str__(self):
         """String for representing"""
         return self.name
 
@@ -125,7 +125,7 @@ class Group(models.Model):
         # Default ordering
         ordering = ['name']
 
-    def _str__(self):
+    def __str__(self):
         """String for representing"""
         return self.name
 
@@ -149,7 +149,7 @@ class Host(models.Model):
         # Default ordering
         ordering = ['hostname']
 
-    def _str__(self):
+    def __str__(self):
         """String for representing"""
         return self.hostname
 
@@ -167,6 +167,6 @@ class Variable(models.Model):
         # Default ordering
         ordering = ['key']
 
-    def _str__(self):
+    def __str__(self):
         """String for representing"""
         return self.key + " = " + self.value
