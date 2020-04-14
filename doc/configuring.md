@@ -16,4 +16,4 @@ Password (again):
 Superuser created successfully.
 ```
 
-Then you can test it on the [admin interface] (http://localhost:8000/admin)
+Then you can test it on the [admin interface](http://localhost:8000/admin)
