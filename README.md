@@ -7,6 +7,7 @@ Yet Another Env Manager
   - [Architecture](#architecture)
   - [How to install](#how-to-install)
   - [Manage your containers](#manage-your-containers)
+  - [Configuring](#configuring)
 
 
 ## Goal of this project
@@ -41,4 +42,8 @@ Follow the [Installation documentation](doc/install.md)
 ## Manage your containers
 
 Follow the [Docker management](doc/docker.md)
+
+## Configuring
+
+Follow the [config documentation](doc/configuring.md)
 
