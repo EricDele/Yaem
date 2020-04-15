@@ -4,9 +4,9 @@ from . import views
 
 router = routers.DefaultRouter()
 router.register(r'manager', views.ManagerViewSet)
-router.register(r'env_type', views.Env_typeViewSet)
-router.register(r'host_type', views.Host_typeViewSet)
-router.register(r'host_status', views.Host_statusViewSet)
+router.register(r'env_type', views.EnvTypeViewSet)
+router.register(r'host_type', views.HostTypeViewSet)
+router.register(r'host_status', views.HostStatusViewSet)
 router.register(r'service', views.ServiceViewSet)
 router.register(r'server', views.ServerViewSet)
 router.register(r'cluster', views.ClusterViewSet)
