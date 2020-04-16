@@ -1,6 +1,5 @@
 from django.db import models
 
-# Create your models here.
 
 class Manager(models.Model):
     """Model class managing the application"""
@@ -18,7 +17,8 @@ class Manager(models.Model):
         """String for representing"""
         return self.key + " = " + self.value
 
-class Env_type(models.Model):
+
+class EnvType(models.Model):
     """Model class for defining environment types"""
 
     # Fields
@@ -33,7 +33,8 @@ class Env_type(models.Model):
         """String for representing"""
         return self.name
 
-class Host_type(models.Model):
+
+class HostType(models.Model):
     """Model class for defining host types"""
 
     # Fields
@@ -48,7 +49,8 @@ class Host_type(models.Model):
         """String for representing"""
         return self.name
 
-class Host_status(models.Model):
+
+class HostStatus(models.Model):
     """Model class for defining host status"""
 
     # Fields
@@ -62,6 +64,7 @@ class Host_status(models.Model):
     def __str__(self):
         """String for representing"""
         return self.name
+
 
 class Service(models.Model):
     """Model class for defining a service"""
@@ -77,6 +80,7 @@ class Service(models.Model):
     def __str__(self):
         """String for representing"""
         return self.name
+
 
 class Server(models.Model):
     """Model class for defining a server"""
@@ -97,12 +101,13 @@ class Server(models.Model):
         """String for representing"""
         return self.name
 
+
 class Cluster(models.Model):
     """Model class for defining a cluster"""
 
     # Fields
     name = models.CharField(max_length=64, null=False)
-    env = models.ForeignKey(Env_type, on_delete=models.CASCADE)
+    env = models.ForeignKey(EnvType, on_delete=models.CASCADE)
 
     # Metadata
     class Meta: 
@@ -112,6 +117,7 @@ class Cluster(models.Model):
     def __str__(self):
         """String for representing"""
         return self.name
+
 
 class Group(models.Model):
     """Model class for defining groups"""
@@ -129,6 +135,7 @@ class Group(models.Model):
         """String for representing"""
         return self.name
 
+
 class Host(models.Model):
     """Model class for defining a host"""
 
@@ -137,8 +144,8 @@ class Host(models.Model):
     fqdn_hostname = models.CharField(max_length=128, null=False)
     server = models.ForeignKey(Server, on_delete=models.CASCADE)
     cluster = models.ForeignKey(Cluster, on_delete=models.CASCADE)
-    host_type = models.ForeignKey(Host_type, on_delete=models.CASCADE)
-    host_status = models.ForeignKey(Host_status, on_delete=models.CASCADE)
+    host_type = models.ForeignKey(HostType, on_delete=models.CASCADE)
+    host_status = models.ForeignKey(HostStatus, on_delete=models.CASCADE)
     group = models.ForeignKey(Group, on_delete=models.CASCADE)
     service = models.ManyToManyField(Service)
     rack = models.CharField(max_length=64, null=False)
@@ -152,6 +159,7 @@ class Host(models.Model):
     def __str__(self):
         """String for representing"""
         return self.hostname
+
 
 class Variable(models.Model):
     """Model class managing variables"""
