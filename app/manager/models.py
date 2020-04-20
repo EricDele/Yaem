@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 
 
 class Manager(models.Model):
@@ -9,7 +10,7 @@ class Manager(models.Model):
     value = models.CharField(max_length=256, null=False)
 
     # Metadata
-    class Meta: 
+    class Meta:
         # Default ordering
         ordering = ['key']
 
@@ -18,163 +19,126 @@ class Manager(models.Model):
         return self.key + " = " + self.value
 
 
-class EnvType(models.Model):
-    """Model class for defining environment types"""
-
-    # Fields
-    name = models.CharField(max_length=64, null=False)
-
-    # Metadata
-    class Meta: 
-        # Default ordering
-        ordering = ['name']
+class Environment(models.Model):
+    name = models.CharField(max_length=64, null=False, blank=False, unique=True)
+    description = models.TextField(max_length=500, null=False, blank=False)
 
     def __str__(self):
-        """String for representing"""
         return self.name
 
 
-class HostType(models.Model):
-    """Model class for defining host types"""
-
-    # Fields
-    name = models.CharField(max_length=64, null=False)
-
-    # Metadata
-    class Meta: 
-        # Default ordering
-        ordering = ['name']
+class Datacenter(models.Model):
+    name = models.CharField(max_length=64, null=False, blank=False, unique=True)
+    description = models.TextField(max_length=500, null=False, blank=False)
 
     def __str__(self):
-        """String for representing"""
+        return self.name
+
+
+class DatacenterRoom(models.Model):
+    center = models.ForeignKey(Datacenter, null=False, blank=False, on_delete=models.PROTECT)
+    name = models.CharField(max_length=64, null=False, blank=False)
+    description = models.TextField(max_length=500, null=False, blank=False)
+
+    def __str__(self):
+        return self.center.__str__() + " : " + self.name
+
+    class Meta:
+        unique_together = [['center', 'name']]
+
+
+class Cluster(models.Model):
+    room = models.ForeignKey(DatacenterRoom, null=False, blank=False, on_delete=models.PROTECT)
+    name = models.CharField(max_length=64, null=False, blank=False)
+    environment = models.ForeignKey(Environment, null=False, blank=False, on_delete=models.PROTECT)
+
+    def __str__(self):
+        return self.room.__str__() + " : " + self.environment.__str__() + " : " + self.name
+
+    class Meta:
+        unique_together = [['room', 'name', 'environment']]
+
+
+class HostType(models.Model):
+    name = models.CharField(max_length=64, null=False, blank=False, unique=True)
+
+    def __str__(self):
         return self.name
 
 
 class HostStatus(models.Model):
-    """Model class for defining host status"""
-
-    # Fields
-    name = models.CharField(max_length=64, null=False)
-
-    # Metadata
-    class Meta: 
-        # Default ordering
-        ordering = ['name']
+    name = models.CharField(max_length=64, null=False, blank=False, unique=True)
 
     def __str__(self):
-        """String for representing"""
         return self.name
 
 
 class Service(models.Model):
-    """Model class for defining a service"""
-
-    # Fields
-    name = models.CharField(max_length=64, null=False)
-
-    # Metadata
-    class Meta: 
-        # Default ordering
-        ordering = ['name']
+    name = models.CharField(max_length=64, null=False, blank=False, unique=True)
 
     def __str__(self):
-        """String for representing"""
-        return self.name
-
-
-class Server(models.Model):
-    """Model class for defining a server"""
-
-    # Fields
-    name = models.CharField(max_length=64, null=False)
-    cpu = models.CharField(max_length=64, null=False)
-    memory = models.PositiveIntegerField()
-    u_size = models.PositiveSmallIntegerField(default=1)
-    end_support = models.DateField()
-
-    # Metadata
-    class Meta: 
-        # Default ordering
-        ordering = ['name']
-
-    def __str__(self):
-        """String for representing"""
-        return self.name
-
-
-class Cluster(models.Model):
-    """Model class for defining a cluster"""
-
-    # Fields
-    name = models.CharField(max_length=64, null=False)
-    env = models.ForeignKey(EnvType, on_delete=models.CASCADE)
-
-    # Metadata
-    class Meta: 
-        # Default ordering
-        ordering = ['name']
-
-    def __str__(self):
-        """String for representing"""
         return self.name
 
 
 class Group(models.Model):
-    """Model class for defining groups"""
-
-    # Fields
-    name = models.CharField(max_length=64, null=False)
-    cluster = models.ForeignKey(Cluster, on_delete=models.CASCADE)
-
-    # Metadata
-    class Meta: 
-        # Default ordering
-        ordering = ['name']
+    name = models.CharField(max_length=64, null=False, blank=False, unique=True)
 
     def __str__(self):
-        """String for representing"""
         return self.name
 
 
 class Host(models.Model):
-    """Model class for defining a host"""
-
-    # Fields
-    hostname = models.CharField(max_length=128, null=False)
-    fqdn_hostname = models.CharField(max_length=128, null=False)
-    server = models.ForeignKey(Server, on_delete=models.CASCADE)
-    cluster = models.ForeignKey(Cluster, on_delete=models.CASCADE)
-    host_type = models.ForeignKey(HostType, on_delete=models.CASCADE)
-    host_status = models.ForeignKey(HostStatus, on_delete=models.CASCADE)
-    group = models.ForeignKey(Group, on_delete=models.CASCADE)
-    service = models.ManyToManyField(Service)
-    rack = models.CharField(max_length=64, null=False)
-    rack_position = models.PositiveSmallIntegerField()
-
-    # Metadata
-    class Meta: 
-        # Default ordering
-        ordering = ['hostname']
+    hostname = models.CharField(max_length=128, null=False, blank=False, unique=True)
+    fqdn_hostname = models.CharField(max_length=128, null=False, blank=False, unique=True)
+    generation = models.CharField(max_length=64, null=True, blank=True)
+    services = models.ManyToManyField(Service)
+    groups = models.ManyToManyField(Group)
+    cpu_nb = models.IntegerField(null=False, blank=False)
+    cpu_speed = models.FloatField(null=False, blank=False)
+    cores_nb = models.IntegerField(null=False, blank=False)
+    threads_nb = models.IntegerField(null=False, blank=False)
+    gpu_speed = models.FloatField(null=False, blank=False)
+    gpu_nb = models.IntegerField(null=False, blank=False)
+    cluster = models.ForeignKey(Cluster, null=False, blank=False, on_delete=models.PROTECT)
+    host_type = models.ForeignKey(HostType, null=False, blank=False, on_delete=models.PROTECT)
+    host_status = models.ForeignKey(HostStatus, null=False, blank=False, on_delete=models.PROTECT)
 
     def __str__(self):
-        """String for representing"""
         return self.hostname
 
 
-class Variable(models.Model):
-    """Model class managing variables"""
-
-    # Fields
-    key = models.CharField(max_length=64, null=False)
-    value = models.CharField(max_length=256, null=False)
-    hostname = models.ForeignKey(Host, on_delete=models.CASCADE)
-    group = models.ForeignKey(Group, on_delete=models.CASCADE)
-
-    # Metadata
-    class Meta: 
-        # Default ordering
-        ordering = ['key']
+class Disk(models.Model):
+    server = models.ForeignKey(Host, null=False, blank=False, on_delete=models.PROTECT)
+    disk_type = models.CharField(max_length=50, null=False, blank=False)
+    size = models.FloatField(null=False, blank=False)
+    interface = models.CharField(max_length=64, null=False, blank=False)
+    raid_level = models.IntegerField(null=False, blank=False)
+    volume_size = models.FloatField(null=False, blank=False)
 
     def __str__(self):
-        """String for representing"""
-        return self.key + " = " + self.value
+        return self.server.__str__() + " : " + self.disk_type
+
+    class Meta:
+        unique_together = [['server', 'disk_type']]
+
+
+class Address(models.Model):
+    server = models.ForeignKey(Host, null=False, blank=False, on_delete=models.PROTECT)
+    address_type = models.CharField(max_length=50, null=False, blank=False)
+    ref_address = models.CharField(max_length=64, null=False, blank=False, unique=True)
+    mac_address = models.CharField(max_length=64, null=False, blank=False, unique=True)
+    interface = models.CharField(max_length=64, null=False, blank=False)
+
+    def __str__(self):
+        return self.server.__str__() + " : " + self.address_type + " : " + self.ref_address
+
+
+class Variable(models.Model):
+    key = models.CharField(max_length=64, null=False, blank=False)
+    value = models.CharField(max_length=64, null=False, blank=False)
+    hostname = models.ForeignKey(Host, null=True, blank=True, on_delete=models.PROTECT)
+    group = models.ForeignKey(Group, null=True, blank=True, on_delete=models.PROTECT)
+
+    def __str__(self):
+        base = str(self.hostname) if self.hostname is not None else str(self.group)
+        return base + " : " + self.key + " : " + self.value
