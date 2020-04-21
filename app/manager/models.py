@@ -8,6 +8,8 @@ class Manager(models.Model):
     # Fields
     key = models.CharField(max_length=64, primary_key=True, null=False)
     value = models.CharField(max_length=256, null=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     # Metadata
     class Meta:
@@ -21,7 +23,9 @@ class Manager(models.Model):
 
 class Environment(models.Model):
     name = models.CharField(max_length=64, null=False, blank=False, unique=True)
-    description = models.TextField(max_length=500, null=False, blank=False)
+    description = models.TextField(max_length=500, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.name
@@ -29,7 +33,9 @@ class Environment(models.Model):
 
 class Datacenter(models.Model):
     name = models.CharField(max_length=64, null=False, blank=False, unique=True)
-    description = models.TextField(max_length=500, null=False, blank=False)
+    description = models.TextField(max_length=500, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.name
@@ -38,7 +44,9 @@ class Datacenter(models.Model):
 class DatacenterRoom(models.Model):
     center = models.ForeignKey(Datacenter, null=False, blank=False, on_delete=models.PROTECT)
     name = models.CharField(max_length=64, null=False, blank=False)
-    description = models.TextField(max_length=500, null=False, blank=False)
+    description = models.TextField(max_length=500, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.center.__str__() + " : " + self.name
@@ -51,6 +59,9 @@ class Cluster(models.Model):
     room = models.ForeignKey(DatacenterRoom, null=False, blank=False, on_delete=models.PROTECT)
     name = models.CharField(max_length=64, null=False, blank=False)
     environment = models.ForeignKey(Environment, null=False, blank=False, on_delete=models.PROTECT)
+    description = models.TextField(max_length=500, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.room.__str__() + " : " + self.environment.__str__() + " : " + self.name
@@ -61,6 +72,8 @@ class Cluster(models.Model):
 
 class HostType(models.Model):
     name = models.CharField(max_length=64, null=False, blank=False, unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.name
@@ -68,6 +81,8 @@ class HostType(models.Model):
 
 class HostStatus(models.Model):
     name = models.CharField(max_length=64, null=False, blank=False, unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.name
@@ -75,6 +90,9 @@ class HostStatus(models.Model):
 
 class Service(models.Model):
     name = models.CharField(max_length=64, null=False, blank=False, unique=True)
+    description = models.TextField(max_length=500, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.name
@@ -82,6 +100,9 @@ class Service(models.Model):
 
 class Group(models.Model):
     name = models.CharField(max_length=64, null=False, blank=False, unique=True)
+    description = models.TextField(max_length=500, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.name
@@ -93,6 +114,7 @@ class Host(models.Model):
     generation = models.CharField(max_length=64, null=True, blank=True)
     services = models.ManyToManyField(Service)
     groups = models.ManyToManyField(Group)
+    description = models.TextField(max_length=500, null=True, blank=True)
     cpu_nb = models.IntegerField(null=False, blank=False)
     cpu_speed = models.FloatField(null=False, blank=False)
     cores_nb = models.IntegerField(null=False, blank=False)
@@ -102,9 +124,14 @@ class Host(models.Model):
     cluster = models.ForeignKey(Cluster, null=False, blank=False, on_delete=models.PROTECT)
     host_type = models.ForeignKey(HostType, null=False, blank=False, on_delete=models.PROTECT)
     host_status = models.ForeignKey(HostStatus, null=False, blank=False, on_delete=models.PROTECT)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.hostname
+
+    class Meta:
+        unique_together = [['hostname', 'cluster'], ['fqdn_hostname', 'cluster']]
 
 
 class Disk(models.Model):
@@ -114,6 +141,8 @@ class Disk(models.Model):
     interface = models.CharField(max_length=64, null=False, blank=False)
     raid_level = models.IntegerField(null=False, blank=False)
     volume_size = models.FloatField(null=False, blank=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.server.__str__() + " : " + self.disk_type
@@ -128,6 +157,8 @@ class Address(models.Model):
     ref_address = models.CharField(max_length=64, null=False, blank=False, unique=True)
     mac_address = models.CharField(max_length=64, null=False, blank=False, unique=True)
     interface = models.CharField(max_length=64, null=False, blank=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.server.__str__() + " : " + self.address_type + " : " + self.ref_address
@@ -138,6 +169,8 @@ class Variable(models.Model):
     value = models.CharField(max_length=64, null=False, blank=False)
     hostname = models.ForeignKey(Host, null=True, blank=True, on_delete=models.PROTECT)
     group = models.ForeignKey(Group, null=True, blank=True, on_delete=models.PROTECT)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         base = str(self.hostname) if self.hostname is not None else str(self.group)
