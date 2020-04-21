@@ -124,6 +124,8 @@ class Host(models.Model):
     cluster = models.ForeignKey(Cluster, null=False, blank=False, on_delete=models.PROTECT)
     host_type = models.ForeignKey(HostType, null=False, blank=False, on_delete=models.PROTECT)
     host_status = models.ForeignKey(HostStatus, null=False, blank=False, on_delete=models.PROTECT)
+    rack = models.CharField(max_length=64, null=False)
+    rack_position = models.PositiveSmallIntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
