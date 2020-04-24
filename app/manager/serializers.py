@@ -1,15 +1,18 @@
 from rest_framework import serializers
 
 from .models import Manager
-from .models import EnvType
+from .models import Environment
 from .models import HostType
 from .models import HostStatus
 from .models import Service
-from .models import Server
 from .models import Cluster
 from .models import Group
 from .models import Host
 from .models import Variable
+from .models import Datacenter
+from .models import DatacenterRoom
+from .models import Disk
+from .models import Address
 
 
 class ManagerSerializer(serializers.HyperlinkedModelSerializer):
@@ -18,9 +21,9 @@ class ManagerSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('key', 'value')
 
 
-class EnvTypeSerializer(serializers.HyperlinkedModelSerializer):
+class EnvironmentSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = EnvType
+        model = Environment
         fields = ('name',)
 
 
@@ -40,12 +43,6 @@ class ServiceSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Service
         fields = ('name',)
-
-
-class ServerSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Server
-        fields = '__all__'
 
 
 class ClusterSerializer(serializers.HyperlinkedModelSerializer):
