@@ -108,6 +108,19 @@ class Group(models.Model):
         return self.name
 
 
+class VMSettings(models.Model):
+    name = models.CharField(max_length=50, null=False, blank=False, unique=True)
+    cpu_nb = models.IntegerField(null=False, blank=False)
+    cpu_speed = models.FloatField(null=False, blank=False)
+    cores_nb = models.IntegerField(null=False, blank=False)
+    threads_nb = models.IntegerField(null=False, blank=False)
+    gpu_speed = models.FloatField(null=False, blank=False)
+    gpu_nb = models.IntegerField(null=False, blank=False)
+
+    def __str__(self):
+        return self.name
+
+
 class Host(models.Model):
     hostname = models.CharField(max_length=128, null=False, blank=False, unique=True)
     fqdn_hostname = models.CharField(max_length=128, null=False, blank=False, unique=True)
@@ -115,12 +128,6 @@ class Host(models.Model):
     services = models.ManyToManyField(Service)
     groups = models.ManyToManyField(Group)
     description = models.TextField(max_length=500, null=True, blank=True)
-    cpu_nb = models.IntegerField(null=False, blank=False)
-    cpu_speed = models.FloatField(null=False, blank=False)
-    cores_nb = models.IntegerField(null=False, blank=False)
-    threads_nb = models.IntegerField(null=False, blank=False)
-    gpu_speed = models.FloatField(null=False, blank=False)
-    gpu_nb = models.IntegerField(null=False, blank=False)
     cluster = models.ForeignKey(Cluster, null=False, blank=False, on_delete=models.PROTECT)
     host_type = models.ForeignKey(HostType, null=False, blank=False, on_delete=models.PROTECT)
     host_status = models.ForeignKey(HostStatus, null=False, blank=False, on_delete=models.PROTECT)
