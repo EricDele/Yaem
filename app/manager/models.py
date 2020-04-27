@@ -108,8 +108,9 @@ class Group(models.Model):
         return self.name
 
 
-class VMSettings(models.Model):
+class HardwareSettings(models.Model):
     name = models.CharField(max_length=50, null=False, blank=False, unique=True)
+    generation = models.CharField(max_length=64, null=True, blank=True)
     cpu_nb = models.IntegerField(null=False, blank=False)
     cpu_speed = models.FloatField(null=False, blank=False)
     cores_nb = models.IntegerField(null=False, blank=False)
@@ -124,9 +125,9 @@ class VMSettings(models.Model):
 class Host(models.Model):
     hostname = models.CharField(max_length=128, null=False, blank=False, unique=True)
     fqdn_hostname = models.CharField(max_length=128, null=False, blank=False, unique=True)
-    generation = models.CharField(max_length=64, null=True, blank=True)
     services = models.ManyToManyField(Service)
     groups = models.ManyToManyField(Group)
+    hardware = models.ForeignKey(HardwareSettings, null=False, blank=False, on_delete=models.PROTECT)
     description = models.TextField(max_length=500, null=True, blank=True)
     cluster = models.ForeignKey(Cluster, null=False, blank=False, on_delete=models.PROTECT)
     host_type = models.ForeignKey(HostType, null=False, blank=False, on_delete=models.PROTECT)
