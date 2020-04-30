@@ -1,127 +1,187 @@
 # Environment
-- model: manager.Env_type
+- model: manager.Environment
   pk: 1
   fields:
     name: Development
-- model: manager.Env_type
+    created_at: "2020-04-30T23:28:00.000Z"
+    updated_at: "2020-04-30T23:28:00.000Z"
+- model: manager.Environment
   pk: 2
   fields:
     name: Integration Fonctionnelle
-- model: manager.Env_type
+    created_at: "2020-04-30T23:28:00.000Z"
+    updated_at: "2020-04-30T23:28:00.000Z"
+- model: manager.Environment
   pk: 3
   fields:
     name: Homologation
-- model: manager.Env_type
+    created_at: "2020-04-30T23:28:00.000Z"
+    updated_at: "2020-04-30T23:28:00.000Z"
+- model: manager.Environment
   pk: 4
   fields:
     name: Production
-- model: manager.Env_type
+    created_at: "2020-04-30T23:28:00.000Z"
+    updated_at: "2020-04-30T23:28:00.000Z"
+- model: manager.Environment
   pk: 5
   fields:
     name: Secours
+    created_at: "2020-04-30T23:28:00.000Z"
+    updated_at: "2020-04-30T23:28:00.000Z"
 
 # Host status
-- model: manager.Host_status
+- model: manager.HostStatus
   pk: 1
   fields:
     name: Provisionning
-- model: manager.Host_status
+    created_at: "2020-04-30T23:28:00.000Z"
+    updated_at: "2020-04-30T23:28:00.000Z"
+- model: manager.HostStatus
   pk: 2
   fields:
     name: Spare
-- model: manager.Host_status
+    created_at: "2020-04-30T23:28:00.000Z"
+    updated_at: "2020-04-30T23:28:00.000Z"
+- model: manager.HostStatus
   pk: 3
   fields:
     name: Error
-- model: manager.Host_status
+    created_at: "2020-04-30T23:28:00.000Z"
+    updated_at: "2020-04-30T23:28:00.000Z"
+- model: manager.HostStatus
   pk: 4
   fields:
     name: Used
+    created_at: "2020-04-30T23:28:00.000Z"
+    updated_at: "2020-04-30T23:28:00.000Z"
 
 # Host type
-- model: manager.Host_type
+- model: manager.HostType
   pk: 1
   fields:
     name: admin
-- model: manager.Host_type
+    created_at: "2020-04-30T23:28:00.000Z"
+    updated_at: "2020-04-30T23:28:00.000Z"
+- model: manager.HostType
   pk: 2
   fields:
     name: master
-- model: manager.Host_type
+    created_at: "2020-04-30T23:28:00.000Z"
+    updated_at: "2020-04-30T23:28:00.000Z"
+- model: manager.HostType
   pk: 3
   fields:
     name: infrastructure
-- model: manager.Host_type
+    created_at: "2020-04-30T23:28:00.000Z"
+    updated_at: "2020-04-30T23:28:00.000Z"
+- model: manager.HostType
   pk: 4
   fields:
     name: datanode
-- model: manager.Host_type
+    created_at: "2020-04-30T23:28:00.000Z"
+    updated_at: "2020-04-30T23:28:00.000Z"
+- model: manager.HostType
   pk: 5
   fields:
     name: workernode
-- model: manager.Host_type
+    created_at: "2020-04-30T23:28:00.000Z"
+    updated_at: "2020-04-30T23:28:00.000Z"
+- model: manager.HostType
   pk: 6
   fields:
     name: edgenode
-- model: manager.Host_type
+    created_at: "2020-04-30T23:28:00.000Z"
+    updated_at: "2020-04-30T23:28:00.000Z"
+- model: manager.HostType
   pk: 7
   fields:
     name: edgedatalab
-- model: manager.Host_type
+    created_at: "2020-04-30T23:28:00.000Z"
+    updated_at: "2020-04-30T23:28:00.000Z"
+- model: manager.HostType
   pk: 8
   fields:
     name: nifinode
-- model: manager.Host_type
+    created_at: "2020-04-30T23:28:00.000Z"
+    updated_at: "2020-04-30T23:28:00.000Z"
+- model: manager.HostType
   pk: 9
   fields:
     name: talendnode
-- model: manager.Host_type
+    created_at: "2020-04-30T23:28:00.000Z"
+    updated_at: "2020-04-30T23:28:00.000Z"
+- model: manager.HostType
   pk: 10
   fields:
     name: elasticsearchnode
-- model: manager.Host_type
+    created_at: "2020-04-30T23:28:00.000Z"
+    updated_at: "2020-04-30T23:28:00.000Z"
+- model: manager.HostType
   pk: 11
   fields:
     name: datanodearchive
+    created_at: "2020-04-30T23:28:00.000Z"
+    updated_at: "2020-04-30T23:28:00.000Z"
 
 # Service
 - model: manager.Service
   pk: 1
   fields:
     name: namenode
+    created_at: "2020-04-30T23:28:00.000Z"
+    updated_at: "2020-04-30T23:28:00.000Z"
 - model: manager.Service
   pk: 2
   fields:
     name: journalnode
+    created_at: "2020-04-30T23:28:00.000Z"
+    updated_at: "2020-04-30T23:28:00.000Z"
 - model: manager.Service
   pk: 3
   fields:
     name: zookeeper
+    created_at: "2020-04-30T23:28:00.000Z"
+    updated_at: "2020-04-30T23:28:00.000Z"
 - model: manager.Service
   pk: 4
   fields:
     name: ssh
+    created_at: "2020-04-30T23:28:00.000Z"
+    updated_at: "2020-04-30T23:28:00.000Z"
 - model: manager.Service
   pk: 5
   fields:
     name: ambari-agent
+    created_at: "2020-04-30T23:28:00.000Z"
+    updated_at: "2020-04-30T23:28:00.000Z"
 - model: manager.Service
   pk: 6
   fields:
     name: java
+    created_at: "2020-04-30T23:28:00.000Z"
+    updated_at: "2020-04-30T23:28:00.000Z"
 - model: manager.Service
   pk: 7
   fields:
     name: postgresql
+    created_at: "2020-04-30T23:28:00.000Z"
+    updated_at: "2020-04-30T23:28:00.000Z"
 - model: manager.Service
   pk: 8
   fields:
     name: krb5kdc
+    created_at: "2020-04-30T23:28:00.000Z"
+    updated_at: "2020-04-30T23:28:00.000Z"
 - model: manager.Service
   pk: 9
   fields:
     name: slapd
+    created_at: "2020-04-30T23:28:00.000Z"
+    updated_at: "2020-04-30T23:28:00.000Z"
 - model: manager.Service
   pk: 10
   fields:
     name: hbase
+    created_at: "2020-04-30T23:28:00.000Z"
+    updated_at: "2020-04-30T23:28:00.000Z"

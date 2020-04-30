@@ -14,6 +14,7 @@ from .models import Datacenter
 from .models import DatacenterRoom
 from .models import Disk
 from .models import Address
+from .models import Hardware
 
 admin.site.register(Manager)
 admin.site.register(Environment)
@@ -28,3 +29,4 @@ admin.site.register(Datacenter)
 admin.site.register(DatacenterRoom)
 admin.site.register(Disk)
 admin.site.register(Address)
+admin.site.register(Hardware)
