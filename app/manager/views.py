@@ -44,6 +44,16 @@ class EnvironmentViewSet(viewsets.ModelViewSet):
     serializer_class = EnvironmentSerializer
 
 
+class DatacenterViewSet(viewsets.ModelViewSet):
+    queryset = Datacenter.objects.all().order_by('name')
+    serializer_class = DatacenterSerializer
+
+
+class DatacenterRoomViewSet(viewsets.ModelViewSet):
+    queryset = DatacenterRoom.objects.all().order_by('name')
+    serializer_class = DatacenterRoomSerializer
+
+
 class HostTypeViewSet(viewsets.ModelViewSet):
     queryset = HostType.objects.all().order_by('name')
     serializer_class = HostTypeSerializer
